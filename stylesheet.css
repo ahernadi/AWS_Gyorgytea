@@ -10,26 +10,36 @@
 */
 
 .ui-widget {
-  font-family: Lucida Grande, Lucida Sans, Verdana, Arial, sans-serif;
-  font-size: 11px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
 }
 
 body {
   background: #fff;
   color: #000;
   margin: 0px;
-  font-size: 11px;
-  font-family: Lucida Grande, Lucida Sans, Verdana, Arial, sans-serif;
+  font-size: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 #bodyWrapper {
+margin-left:auto;
+margin-right:auto;
 }
 
 #bodyContent {
 }
 
 #header {
-  height: 60px;
+  height: 40px;
+  background: url(ext/960gs/header_bg.gif) no-repeat 0 -4px;
+  margin-left:-16px;
+  margin-right:-16px;
+  padding-left:16px;
+  padding-right:16px;
+  
 }
 
 #storeLogo {
@@ -50,10 +60,11 @@ body {
   padding-top: 5px;
 }
 
-.infoBoxContainer { }
+.infoBoxContainer {
+padding-bottom:10px;}
 
 .infoBoxHeading {
-  padding: 2px;
+  padding: 17px;
   font-size: 11px;
 }
 
@@ -137,6 +148,7 @@ table, p {
 
 .buttonAction {
   float: right;
+  margin-right:20px;
 }
 
 .boxText { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
