@@ -2,3 +2,4 @@
 .htpasswd_oscommerce
 
 admin/configuration.php
+includes/configure.php
