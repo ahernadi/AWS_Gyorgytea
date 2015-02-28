@@ -394,7 +394,9 @@
 
       if (($response_array['ACK'] != 'Success') && ($response_array['ACK'] != 'SuccessWithWarning')) {
         $this->sendDebugEmail();
-      }
+		error_log( $post_string,0); 
+		     }
+
 
       return $response_array;
     }

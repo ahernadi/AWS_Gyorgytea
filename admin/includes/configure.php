@@ -4,9 +4,10 @@
   define('HTTPS_CATALOG_SERVER', '');
   define('ENABLE_SSL_CATALOG', 'false');
   define('DIR_FS_DOCUMENT_ROOT', '/var/www/oscommerce/');
-  define('DIR_WS_ADMIN', '/admin/');
+  define('DIR_WS_ADMIN', '/oscommerce/admin/');
   define('DIR_FS_ADMIN', '/var/www/oscommerce/admin/');
-  define('DIR_WS_CATALOG', '/');
+  define('DIR_WS_CATALOG', '/oscommerce/');
+  define('DIR_WS_HTTPS_CATALOG', '/oscommerce/');
   define('DIR_FS_CATALOG', '/var/www/oscommerce/');
   define('DIR_WS_IMAGES', 'images/');
   define('DIR_WS_ICONS', DIR_WS_IMAGES . 'icons/');
@@ -31,4 +32,5 @@
   define('DB_DATABASE', 'oscommerce');
   define('USE_PCONNECT', 'false');
   define('STORE_SESSIONS', 'mysql');
+  define('CFG_TIME_ZONE', 'UTC');
 ?>
