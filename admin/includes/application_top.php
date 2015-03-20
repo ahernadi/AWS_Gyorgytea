@@ -9,7 +9,10 @@
 
   Released under the GNU General Public License
 */
-
+// USPS START
+// set default store time zone
+	ini_set('date.timezone', 'America/New_York'); // REPLACE WITH YOUR NEAREST CITY For city list see http://www.php.net/manual/en/timezones.america.php.
+// USPS END
 // Start the clock for the page parse time log
   define('PAGE_PARSE_START_TIME', microtime());
 

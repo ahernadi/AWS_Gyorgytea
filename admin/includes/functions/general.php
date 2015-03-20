@@ -1472,4 +1472,46 @@
       return is_writable($file);
     }
   }
+// USPS START
+function tep_cfg_usps_services($select_array, $key_value, $key = '')
+	{
+	$key_values = explode( ", ", $key_value);
+	$name = (($key) ? 'configuration[' . $key . '][]' : 'configuration_value');
+	$string = '<b><div style="width:20px;float:left;text-align:center;">&nbsp;</div><div style="width:30px;float:left;text-align:center;">Min</div><div style="width:30px;float:left;text-align:center;">Max</div><div style="float:left;"></div><div style="width:50px;float:right;text-align:center;">Handling</div></b><div style="clear:both;"></div>';
+	for ($i=0; $i<sizeof($select_array); $i++)
+		{
+		$string .= '<div id="' . $key . $i . '">';
+		$string .= '<div style="width:20px;float:left;text-align:center;">' . tep_draw_checkbox_field($name, $select_array[$i], (in_array($select_array[$i], $key_values) ? 'CHECKED' : '')) . '</div>';
+		if (in_array($select_array[$i], $key_values)) next($key_values);
+		$string .= '<div style="width:30px;float:left;text-align:center;">' . tep_draw_input_field($name, current($key_values), 'size="1"') . '</div>';
+		next($key_values);
+		$string .= '<div style="width:30px;float:left;text-align:center;">' . tep_draw_input_field($name, current($key_values), 'size="1"') . '</div>';
+		next($key_values);
+		$string .= '<div style="float:left;">' . preg_replace(array('/RM/', '/TM/', '/International/', '/Envelope/', '/ Mail/', '/Large/', '/Medium/', '/Small/', '/First/', '/Legal/', '/Padded/', '/Flat Rate/', '/Regional Rate/', '/Express Guaranteed /'), array('', '', 'Intl', 'Env', '', 'Lg.', 'Md.', 'Sm.', '1st', 'Leg.', 'Pad.', 'F/R', 'R/R', 'Exp Guar'), $select_array[$i]) . '</div>';
+		$string .= '<div style="width:50px;float:right;text-align:center;">$' . tep_draw_input_field($name, current($key_values), 'size="2"') . '</div>';
+		next($key_values);
+		$string .= '<div style="clear:both;"></div></div>';
+		}
+	return $string;
+	}
+function tep_cfg_usps_extraservices($select_array, $key_value, $key = '')
+	{
+	$key_values = explode( ", ", $key_value);
+	$name = (($key) ? 'configuration[' . $key . '][]' : 'configuration_value');
+	$string = '<b><div style="width:20px;float:left;text-align:center;">N</div><div style="width:20px;float:left;text-align:center;">Y</div></b><div style="clear:both;"></div>';
+	for ($i=0; $i<sizeof($select_array); $i++)
+		{
+		$string .= tep_draw_hidden_field($name, $select_array[$i]);
+		next($key_values);
+		$string .= '<div id="' . $key . $i . '">';
+		$string .= '<div style="width:20px;float:left;text-align:center;"><input type="checkbox" name="' . $name . '" value="N" ' . (current($key_values) == 'N' || current($key_values) == '' ? 'CHECKED' : '') . ' id="N-'.$key.$i.'" onClick="if(this.checked==1)document.getElementById(\'Y-'.$key.$i.'\').checked=false;else document.getElementById(\'Y-'.$key.$i.'\').checked=true;"></div>';
+		$string .= '<div style="width:20px;float:left;text-align:center;"><input type="checkbox" name="' . $name . '" value="Y" ' . (current($key_values) == 'Y' ? 'CHECKED' : '') . ' id="Y-'.$key.$i.'" onClick="if(this.checked==1)document.getElementById(\'N-'.$key.$i.'\').checked=false;else document.getElementById(\'N-'.$key.$i.'\').checked=true;"></div>';
+		next($key_values);
+		$string .= preg_replace(array('/Signature/', '/without/', '/Merchandise/', '/TM/', '/RM/'), array('Sig', 'w/out', 'Merch.', '', ''), $select_array[$i]) . '<br>';
+		$string .= '<div style="clear:both;"></div></div>';
+		}
+	return $string;
+	}
+// USPS END
+
 ?>
