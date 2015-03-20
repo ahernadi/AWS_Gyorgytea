@@ -143,6 +143,7 @@
   }
 
 // get all available shipping quotes
+error_log('Get Quotes');
   $quotes = $shipping_modules->quote();
 
 // if no shipping method has been selected, automatically select the cheapest method.

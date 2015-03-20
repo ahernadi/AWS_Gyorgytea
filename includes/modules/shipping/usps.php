@@ -96,6 +96,7 @@
       $shipping_weight = ($shipping_weight < 0.1 ? 0.1 : $shipping_weight);
       $shipping_pounds = floor ($shipping_weight);
       $shipping_ounces = round(16 * ($shipping_weight - floor($shipping_weight)));
+	  error_log('Weight:'.$shipping_ounces.'Oz '.$shipping_pounds);
       $this->_setWeight($shipping_pounds, $shipping_ounces);
       $uspsQuote = $this->_getQuote();
       if (is_array($uspsQuote)) {
@@ -110,7 +111,7 @@
           $size = sizeof($uspsQuote);
           for ($i=0; $i<$size; $i++) {
             list($type, $cost) = each($uspsQuote[$i]);
-
+error_log('type:'.$type.' cost:'.$cost.' Method:'.$method);
 // echo "USPS $type @ $cost<br />";
 	    if (($method == '' && in_array($type, $this->types)) || $method == $type) {
 	       if (strpos($type, "Flat Rate")) $type_flat = $type . ', subject to verification';
@@ -190,7 +191,7 @@
       if ($order->delivery['country']['id'] == SHIPPING_ORIGIN_COUNTRY) {
         $dest_zip = str_replace(' ', '', $order->delivery['postcode']);
         if ($order->delivery['country']['iso_code_2'] == 'US') $dest_zip = substr($dest_zip, 0, 5);
-	$request = '<RateV3Request USERID="' . MODULE_SHIPPING_USPS_USERID . '">' .
+	$request = '<RateV4Request USERID="' . MODULE_SHIPPING_USPS_USERID . '">' .
 	    '<Package ID="0">' .
 	      '<Service>' . 'ALL' . '</Service>' .
               '<ZipOrigination>' . SHIPPING_ORIGIN_ZIP . '</ZipOrigination>' .
@@ -198,8 +199,8 @@
 	      '<Pounds>' . $this->pounds . '</Pounds>' .
 	      '<Ounces>' . $this->ounces . '</Ounces>' .
 	      '<Container/><Size>Regular</Size><Machinable>True</Machinable>' .
-	    '</Package></RateV3Request>';
-        $request = 'API=RateV3&XML=' . urlencode($request);
+	    '</Package></RateV4Request>';
+        $request = 'API=RateV4&XML=' . urlencode($request);
       } else {
         $request  = '<IntlRateRequest USERID="' . MODULE_SHIPPING_USPS_USERID . '">' .
                     '<Package ID="0">' .
@@ -219,7 +220,6 @@
       }
 
       $body = '';
-
       if (!class_exists('httpClient')) {
         include('includes/classes/http_client.php');
       }
@@ -316,7 +316,7 @@
           }
         }
       }
-
+error_log(sizeof($rates));
       return ((sizeof($rates) > 0) ? $rates : false);
     }
 
